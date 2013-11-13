@@ -5,7 +5,7 @@
  * @author Scott Andrews
  */
 
-(function (define, process) {
+(function (define, nodeVersion, XMLHttpRequest) {
 	'use strict';
 
 	define(function (require) {
@@ -56,7 +56,7 @@
 		 * @class Client
 		 */
 
-		if (process && process.versions && process.versions.node) {
+		if (!XMLHttpRequest && !!nodeVersion) {
 			// evade build tools
 			moduleId = './client/node';
 			return require(moduleId);
@@ -67,6 +67,7 @@
 
 }(
 	typeof define === 'function' && define.amd ? define : function (factory) { module.exports = factory(require); },
-	typeof process === 'undefined' ? undefined : process
+	typeof process === 'undefined' ? undefined : process && process.versions && process.versions.node,
+	typeof XMLHttpRequest === 'undefined' ? undefined : XMLHttpRequest
 	// Boilerplate for AMD and Node
 ));
