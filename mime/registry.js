@@ -16,7 +16,7 @@
 
 		function normalizeMime(mime) {
 			// TODO we're dropping info that may be important
-			return mime.split(/[;\+]/)[0].trim();
+			return mime.split(/[;]/)[0].trim();
 		}
 
 		function Registry(parent) {
